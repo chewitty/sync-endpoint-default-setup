@@ -1,0 +1,13 @@
+The solve the problem where a registered user in LDAP is not able to login:
+1) You must change the settings in the server.xml file in:
+	sync-endpoint/sync-endpoint-docker-swarm
+	sync-endpoint/sync-endpoint-docker-test
+	
+	change the AJP Connector element to:
+	<Connector port="8009" protocol="AJP/1.3" redirectPort="8443" secretRequired="true" secret="namnetiq" />
+	
+2) You must rebuild the sync-endpoint (i.e. in the sync-endpoint folder):
+	mvn clean install
+
+3) Then, you must rebuild the sync-web-ui image again (back in the sync-endpoint-default-setup folder):
+	docker build --pull -t odk/sync-web-ui https://github.com/odk-x/sync-endpoint-web-ui.git
