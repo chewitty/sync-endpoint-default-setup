@@ -32,6 +32,8 @@ services:
       - db-vol:/var/lib/postgresql/data
     env_file:
       - db.env
+    ports:
+      - 5432:5432
   db-bootstrap:
     image: odk/db-bootstrap
     deploy:
